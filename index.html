@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Emotion labeling research task" />
+  <title>Emotion Labeling Study</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">RESEARCH LABELING TASK</p>
+        <h1>Emotion Labeling Study</h1>
+      </div>
+      <div id="headerProgress" class="header-progress hidden" aria-live="polite"></div>
+    </header>
+
+    <section id="setupError" class="notice error hidden" role="alert"></section>
+
+    <section id="instructionsScreen" class="screen">
+      <div class="hero-card">
+        <p class="kicker">What you will do</p>
+        <h2>Label the dominant emotion expressed in 5 tweets.</h2>
+        <p>
+          You will see five short messages selected from the Emotion dataset.
+          For each message, choose exactly <strong>one</strong> of six emotion
+          categories: anger, fear, joy, love, sadness, or surprise.
+        </p>
+        <div class="task-facts">
+          <div><strong>5</strong><span>tweets</span></div>
+          <div><strong>6</strong><span>emotion choices</span></div>
+          <div><strong>1</strong><span>label per tweet</span></div>
+        </div>
+      </div>
+
+      <section class="content-card">
+        <h2>Instructions</h2>
+        <ol class="instruction-list">
+          <li>
+            <strong>Read the entire tweet.</strong>
+            Tweets may contain informal grammar, abbreviations, or unusual wording.
+          </li>
+          <li>
+            <strong>Identify the emotion expressed by the author.</strong>
+            Label what the text communicates, not the emotion that the tweet causes
+            you personally to feel.
+          </li>
+          <li>
+            <strong>Choose exactly one label.</strong>
+            Select the single emotion that best represents the tweet.
+          </li>
+          <li>
+            <strong>If several emotions seem possible, choose the dominant one.</strong>
+            Ask: “If I had to summarize the author’s emotional state with one of the
+            six available labels, which is the closest fit?”
+          </li>
+          <li>
+            <strong>Use only the text shown.</strong>
+            Do not search for the original tweet, author, or surrounding context, and
+            do not use an AI tool or another person to choose the label.
+          </li>
+          <li>
+            <strong>There are no intentionally hidden extra categories.</strong>
+            Even if a tweet feels ambiguous, choose the closest of the six categories.
+          </li>
+          <li>
+            <strong>Complete all five tweets.</strong>
+            Your assignment is saved, so entering the same participant ID again will
+            resume the same five tweets rather than give you a new set.
+          </li>
+        </ol>
+      </section>
+
+      <section class="content-card">
+        <h2>The six labels</h2>
+        <p class="section-intro">
+          Use these definitions as your guide. Focus on the dominant emotional state
+          expressed in the message.
+        </p>
+        <div class="definition-grid">
+          <article class="definition"><h3>Anger</h3><p>Anger, irritation, frustration, resentment, hostility, or fury.</p></article>
+          <article class="definition"><h3>Fear</h3><p>Fear, anxiety, worry, nervousness, apprehension, or feeling threatened.</p></article>
+          <article class="definition"><h3>Joy</h3><p>Happiness, pleasure, excitement, contentment, delight, or positive enthusiasm.</p></article>
+          <article class="definition"><h3>Love</h3><p>Affection, tenderness, fondness, care, attachment, warmth, or romantic feeling.</p></article>
+          <article class="definition"><h3>Sadness</h3><p>Sadness, grief, disappointment, hopelessness, loneliness, sorrow, or feeling down.</p></article>
+          <article class="definition"><h3>Surprise</h3><p>Astonishment, amazement, shock, wonder, or a reaction to something unexpected.</p></article>
+        </div>
+      </section>
+
+      <section class="content-card">
+        <h2>Worked examples</h2>
+        <p class="section-intro">
+          These are examples from the same Emotion dataset. They are examples only
+          and will <strong>not</strong> appear among your five study tweets.
+        </p>
+
+        <div class="examples">
+          <article class="example">
+            <div class="example-message">“im feeling really quite angry”</div>
+            <div class="example-answer"><span>Correct label</span><strong>Anger</strong></div>
+            <p>The author explicitly says they are feeling angry.</p>
+          </article>
+
+          <article class="example">
+            <div class="example-message">“im feeling scared”</div>
+            <div class="example-answer"><span>Correct label</span><strong>Fear</strong></div>
+            <p>“Scared” directly expresses fear.</p>
+          </article>
+
+          <article class="example">
+            <div class="example-message">“i feel very happy and excited since i learned so many things”</div>
+            <div class="example-answer"><span>Correct label</span><strong>Joy</strong></div>
+            <p>“Happy” and “excited” indicate a positive, joyful emotional state.</p>
+          </article>
+
+          <article class="example">
+            <div class="example-message">“i feel romantic too”</div>
+            <div class="example-answer"><span>Correct label</span><strong>Love</strong></div>
+            <p>The romantic feeling is best represented by the love category.</p>
+          </article>
+
+          <article class="example">
+            <div class="example-message">“i actually feel sorrowful”</div>
+            <div class="example-answer"><span>Correct label</span><strong>Sadness</strong></div>
+            <p>“Sorrowful” directly expresses sadness.</p>
+          </article>
+
+          <article class="example">
+            <div class="example-message">“i want to hold this feeling of shocked awe and wonder forever”</div>
+            <div class="example-answer"><span>Correct label</span><strong>Surprise</strong></div>
+            <p>Shock, awe, and wonder most closely match surprise.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-card begin-card">
+        <h2>Before you begin</h2>
+        <p>
+          Enter the <strong>participant ID given to you by the researcher</strong>.
+          Please do not enter your name, email address, or other identifying information.
+        </p>
+
+        <label class="field-label" for="participantId">Participant ID</label>
+        <input
+          id="participantId"
+          class="text-input"
+          type="text"
+          inputmode="text"
+          maxlength="64"
+          autocomplete="off"
+          placeholder="Example: P017"
+        />
+        <p class="field-help">
+          Use the exact same ID if you need to resume the task.
+        </p>
+
+        <label class="ack-row">
+          <input id="acknowledge" type="checkbox" />
+          <span>
+            I have read the instructions and examples, and I understand that I should
+            choose one dominant emotion for each of the five tweets.
+          </span>
+        </label>
+
+        <button id="startButton" class="primary-button" type="button">
+          Begin the 5-tweet task
+        </button>
+        <p id="startError" class="inline-error hidden" role="alert"></p>
+      </section>
+    </section>
+
+    <section id="taskScreen" class="screen hidden">
+      <div class="task-layout">
+        <aside class="task-sidebar">
+          <p class="eyebrow">YOUR TASK</p>
+          <h2>Choose the best emotion.</h2>
+          <p>
+            Label the emotion expressed by the author. If more than one seems
+            possible, choose the dominant or closest-fitting label.
+          </p>
+
+          <div class="mini-definitions">
+            <p><strong>Anger</strong> irritation, frustration, fury</p>
+            <p><strong>Fear</strong> anxiety, worry, apprehension</p>
+            <p><strong>Joy</strong> happiness, delight, excitement</p>
+            <p><strong>Love</strong> affection, care, fondness</p>
+            <p><strong>Sadness</strong> sorrow, grief, hopelessness</p>
+            <p><strong>Surprise</strong> shock, awe, unexpectedness</p>
+          </div>
+        </aside>
+
+        <section class="annotation-card" aria-live="polite">
+          <div class="annotation-topline">
+            <span id="itemCounter">Tweet 1 of 5</span>
+            <span id="saveState" class="save-state"></span>
+          </div>
+
+          <div id="tweetText" class="tweet-card"></div>
+
+          <fieldset id="emotionFieldset" class="emotion-fieldset">
+            <legend>Which emotion is expressed most strongly?</legend>
+            <div id="emotionOptions" class="emotion-options"></div>
+          </fieldset>
+
+          <p class="selection-hint">
+            Select one answer, then save it to continue.
+          </p>
+
+          <div class="task-actions">
+            <button id="previousButton" class="secondary-button" type="button">Previous</button>
+            <button id="saveButton" class="primary-button" type="button">Save &amp; continue</button>
+          </div>
+          <p id="taskError" class="inline-error hidden" role="alert"></p>
+        </section>
+      </div>
+    </section>
+
+    <section id="completeScreen" class="screen hidden">
+      <div class="completion-card">
+        <div class="checkmark" aria-hidden="true">✓</div>
+        <p class="eyebrow">TASK COMPLETE</p>
+        <h2>Thank you for participating.</h2>
+        <p>
+          Your five emotion labels have been recorded successfully.
+          You may now close this page.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Emotion Labeling Study · Uses the DAIR.AI Emotion dataset
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

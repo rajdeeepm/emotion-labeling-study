@@ -1,0 +1,11 @@
+.DS_Store
+.venv/
+__pycache__/
+*.pyc
+
+# Contains the hidden ground truth for the 100 study items.
+private/*
+!private/.gitkeep
+
+# Local researcher credentials. NEVER commit.
+.env.local

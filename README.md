@@ -2,7 +2,7 @@
 
 This version is designed for a real participant study:
 
-**GitHub Pages = public participant interface**  
+**Vercel = public participant interface**  
 **Supabase = persistent database + secure random assignment**
 
 Participants only need a normal web link. There is no localhost requirement.

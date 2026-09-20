@@ -3,11 +3,11 @@
 This version is designed for a real participant study:
 
 **Vercel = public participant interface**  
-**Supabase = persistent database + secure random assignment**
+**Supabase = database and secure random assignment**
 
 Participants only need a normal web link. There is no localhost requirement.
 
-## Study behavior
+## Study design elements
 
 - Task pool: 100 tweets from `dair-ai/emotion`
 - 100 tweets distributed as evenly as possible across the six emotions (17/17/17/17/16/16)
@@ -35,6 +35,8 @@ researcher_export.sql       Researcher-side results query
 private/                    Generated task CSV lives here and is gitignored
 ```
 
+# To recreate this study, follows these steps: 
+
 ## 1. Create a Supabase project
 
 Create a Supabase project.
@@ -45,7 +47,7 @@ In the project's **SQL Editor**, paste and run:
 supabase/schema.sql
 ```
 
-The schema intentionally gives the public browser no direct table access.
+The schema gives the public browser no direct table access.
 The public client can call only two database functions:
 
 - `start_or_resume_study`
@@ -58,8 +60,8 @@ Neither function returns the hidden ground-truth label.
 From the project root:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+python -m venv .env
+source .env/bin/activate
 pip install -r scripts/requirements.txt
 python scripts/create_task_dataset.py
 ```
@@ -78,7 +80,7 @@ are sampled.
 
 ## 3. Upload the task items to Supabase
 
-Get your project URL and a **secret** key from Supabase.
+Get the project URL from Supabase and a **secret** key from Supabase.
 
 The secret key is researcher-only. NEVER put it in `config.js`, HTML,
 JavaScript, or GitHub.
@@ -105,12 +107,12 @@ supabasePublishableKey: "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE",
 with the project URL and **publishable** key from Supabase.
 
 A publishable key is intended to be present in browser code. Its permissions
-are limited by the database's grants/RLS and the RPC interface. Never use a
+are limited by the database's grants/RLS and the RPC interface. Do not use a
 secret/service-role key here.
 
 ## 5. Test locally before publishing
 
-Because this is a static site, any tiny static server is enough:
+Given that this is a static site, any tiny static server will do:
 
 ```bash
 python -m http.server 8000
@@ -123,7 +125,7 @@ http://localhost:8000
 ```
 
 This local test is only for the researcher. Participants will use the
-published GitHub Pages URL.
+published Vercel Page URL.
 
 Test with a fake participant ID such as:
 
@@ -134,14 +136,14 @@ TEST01
 Confirm:
 1. Five tweets are shown.
 2. Each selection saves.
-3. Refreshing and re-entering `TEST01` resumes the same five tweets.
+3. Refreshing and re-entering `TEST01` resumes the same five tweets or if completed, then shows the study is completed
 4. The completion page appears after five saved labels.
 
-## 6. Publish with GitHub Pages
+## 6. Publish with Vercel
 
 Create a GitHub repository and place these project files at the repository root.
 
-Commit and push:
+Commit and push the project:
 
 ```bash
 git init
@@ -152,15 +154,36 @@ git remote add origin YOUR_REPOSITORY_URL
 git push -u origin main
 ```
 
-On GitHub:
+Before pushing, run:
 
-1. Open the repository.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the `main` branch and `/ (root)`.
-5. Save.
+```bash
+git status
+```
 
-GitHub will show the public study URL. Give that URL to participants.
+and confirm that `private/task_dataset.csv` is **not** included. This file contains the hidden ground-truth labels and should remain private.
+
+Next, deploy the repository with Vercel:
+
+1. Go to [Vercel](https://vercel.com/) and sign in with your GitHub account.
+2. Click **Add New → Project**.
+3. Find and import the GitHub repository containing the emotion labeling study.
+4. Keep the **Root Directory** set to the repository root (`./`).
+5. Since this project is plain HTML, CSS, and JavaScript, no special framework configuration is required.
+6. Click **Deploy**.
+7. Wait until the deployment status shows that the site is ready.
+
+Vercel will provide a public URL similar to:
+
+```text
+https://emotion-labeling-study.vercel.app
+```
+
+Open this URL yourself and complete one full test run before sharing it with participants.
+
+Because the GitHub repository is connected to Vercel, future pushes to the production branch will automatically trigger a new deployment.
+
+Once the production version has been tested successfully, give the Vercel URL to participants together with their assigned participant ID.
+
 
 ## 7. Export responses
 
@@ -185,8 +208,7 @@ The result includes:
 You can download the query result as CSV from Supabase.
 
 ## Participant IDs
-
-Assign anonymous codes such as:
+anonymous codes such as the following will be used by participants before they enter the study:
 
 ```text
 P001
@@ -194,8 +216,7 @@ P002
 P003
 ```
 
-Do not ask participants to type their names or email addresses unless your
-study protocol specifically requires identifiable data.
+Participants are asked to not enter your name, email address, or other identifying information.
 
 ## Important security rule
 
@@ -203,7 +224,7 @@ Safe in `config.js`:
 - Supabase project URL
 - Supabase publishable key
 
-Never public:
+These are not public:
 - Supabase secret key
 - service-role key
 - `private/task_dataset.csv`

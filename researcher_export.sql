@@ -1,4 +1,4 @@
--- Run in the Supabase SQL Editor as the researcher.
+-- This will be run in the Supabase SQL Editor as the researcher.
 -- This export shows exactly who labeled which tweet with which label,
 -- alongside hidden ground truth for later agreement/accuracy analysis.
 

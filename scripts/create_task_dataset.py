@@ -7,7 +7,7 @@ STUDY_VERSION = "emotion-v1"
 TOTAL_ITEMS = 100
 OUTPUT = Path("private/task_dataset.csv")
 
-# These six examples are shown on the instructions page and must NOT be study items.
+# These six examples are shown on the instructions page and ARE NOT study items.
 PRACTICE_EXAMPLES = {
     "anger": "im feeling really quite angry",
     "fear": "im feeling scared",
@@ -30,8 +30,8 @@ def main():
     practice_texts = set(PRACTICE_EXAMPLES.values())
     df = df[~df["text"].isin(practice_texts)].copy()
 
-    # Create exactly 100 study items, distributed as evenly as mathematically
-    # possible across the six categories: four classes get 17 items and two
+    # This creates exactly 100 study items, distributed evenly
+    # across the six categories: four classes get 17 items and two
     # classes get 16 items.
     emotions = ["anger", "fear", "joy", "love", "sadness", "surprise"]
     base = TOTAL_ITEMS // len(emotions)      # 16
